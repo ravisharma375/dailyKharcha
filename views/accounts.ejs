@@ -1,0 +1,141 @@
+<div class="content-wrapper">
+    <div class="page-header">
+      <h3 class="page-title"> Account. </h3>
+      <!-- <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="#">Tables</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Basic tables</li>
+        </ol>
+      </nav> -->
+    </div>
+    <div class="row">
+      <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <!-- <h4 class="card-title">Basic Table</h4> -->
+            <button class="btn btn-primary btn-md" data-toggle="modal" data-target="#exampleModal">Add Account</button>
+            </p>
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Sr No.</th>
+                    <th>Account Name</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% count =0; account.forEach( function(item){ count++;  %>
+                  <tr>
+                    <td><%= (count<10) ? '0'+count : count %></td>
+                    <td><%= item.accountName %></td>
+                    <td><%= item.amount %></td>
+                    <td>
+                      <% if(item.isActive){ %>
+                        <p class="badge badge-success"><i class="icon icon-check"></i>Active</p>
+                        <%} else{ %>
+                        <p class="badge badge-danger"><i class="icon icon-times"></i>In Active</p>
+                        <% } %>
+                        </td>
+                    <td>
+                      <button onclick="javascript:editAccountModal('<%= item.accountId %>','<%= item.accountName %>')" data-toggle="modal" data-target="#editAccountModel" class="btn btn-primary mdi mdi-border-color"></button>
+                      <button class="btn btn-primary mdi mdi-delete"></button>
+                    </td>
+                  </tr>
+                  <% }) %>
+                </tbody>
+              </table>
+              <!-- <div class="card-body">
+                <nav>
+                  <ul class="pagination  justify-content-center pagination-success">
+                    <li class="page-item"><a class="page-link" href="#"><i class="mdi mdi-chevron-left"></i></a></li>
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#">4</a></li>
+                    <li class="page-item"><a class="page-link" href="#"><i class="mdi mdi-chevron-right"></i></a></li>
+                  </ul>
+                </nav>
+              </div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!--Add Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Account</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12 grid-margin stretch-card">
+            <div class="card">
+              <div class="card-body">
+                <form  method="post" enctype="multipart/form-data" id="giftCardForm" name="giftCardForm">
+                  <div class="form-group">
+                    <label for="createAccountModel">Account Name</label>
+                    <input id="accountName" name="accountName" type="text" class="form-control" id="createAccountModel" placeholder="Account Name">
+                  </div>
+                  <button type="submit"  class="btn btn-primary mr-2">Submit</button>
+                  <button class="btn btn-dark" data-dismiss="modal">Cancel</button>
+                </form>
+                <br>
+                <h4 id="ErrorSuccessMsg"></h4>
+              </div>
+            </div>
+          </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--Add Modal -->
+<!--Edit Modal -->
+<div class="modal fade" id="editAccountModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit Account</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12 grid-margin stretch-card">
+            <div class="card">
+              <div class="card-body">
+                <form  method="post" enctype="multipart/form-data" id="editAccountId" name="editAccountId">
+                  <div class="form-group">
+                    <label for="createAccountModel">Account Name</label>
+                    <input id="editAccountId" name="accountId" type="text" class="form-control" hidden>
+                    <input id="editAccountName" name="accountName" type="text" class="form-control"  value="" placeholder="Account Name">
+                  </div>
+                  <button type="submit"  class="btn btn-primary mr-2">Submit</button>
+                  <button class="btn btn-dark" data-dismiss="modal">Cancel</button>
+                </form>
+                <br>
+                <h4 id="editErrorSuccessMsg"></h4>
+              </div>
+            </div>
+          </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--Edit Modal -->
+<script type="text/javascript" src="custom/account.js"></script>
+<script>
+  document.getElementById("dyUserName").innerHTML = "<%= fullName %>"
+</script>
